@@ -1,0 +1,64 @@
+@font-face {
+	font-family: 'Vela Sans';
+	src: url('../public/fonts/VelaSans-Regular.eot');
+	src: local('☺'), url('../public/fonts/VelaSans-Regular.woff') format('woff'), url('../public/fonts/VelaSans-Regular.ttf') format('truetype'), url('../public/fonts/VelaSans-Regular.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+:root {
+	--color-primary: #16191D;
+	--color-blue: #134EC1;
+	--color-orange: #F89B11;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+html {
+	box-sizing: border-box;
+	font-size: 62.5%;
+
+	@media (max-width: 87.5em) {
+		font-size: 50%;
+	}
+}
+
+body {
+	font-family: 'Inter', sans-serif;
+	font-weight: 400;
+	line-height: 1.6;
+	min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+	padding: 0;
+	line-height: inherit;
+	font-weight: normal;
+}
+
+a,
+a:visited {
+	text-decoration: none;
+	color: inherit;
+}
+
+.container {
+	max-width: 132rem;
+	padding: 0 20px;
+	margin: 0 auto;
+}
