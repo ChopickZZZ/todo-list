@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import TaskModal from './components/TaskModal.vue';
 
 </script>
 
@@ -14,6 +15,7 @@
 					</svg>
 				</button>
 			</div>
+			<TaskModal />
 			<div class="list__utils utiils">
 				<div class="utils__search">
 					<span class="utils__icon">
