@@ -1,14 +1,20 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+const emit = defineEmits<{
+	(event: 'close'): void,
+	(event: 'create', description: string): void
+}>()
 
+const description = ref('')
 </script>
 
 <template>
 	<div class="modal">
-		<div class="modal__backdrop"></div>
+		<div class="modal__backdrop" @click="emit('close')"></div>
 		<div class="modal__content">
 			<div class="modal__top">
 				<h2 class="modal__title">Создать новую задачу</h2>
-				<button class="modal__close-btn">
+				<button class="modal__close-btn" @click="emit('close')">
 					<svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M1 1L4 4M7 7L4 4M4 4L7 1M4 4L1 7" stroke="white" stroke-linecap="round" />
 					</svg>
@@ -16,9 +22,9 @@
 			</div>
 			<div class="modal__input-container">
 				<label class="modal__label" for="description">Описание</label>
-				<input class="modal__input" placeholder="Введите описание">
+				<input class="modal__input" placeholder="Введите описание" v-model="description">
 			</div>
-			<button class="modal__main-btn">Создать</button>
+			<button class="modal__main-btn" @click="emit('create', description)">Создать</button>
 		</div>
 	</div>
 </template>

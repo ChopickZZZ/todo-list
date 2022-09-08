@@ -1,6 +1,20 @@
 <script setup lang="ts">
 import TaskModal from './components/TaskModal.vue';
+import ListItem from './components/ListItem.vue';
+import { computed, ref } from 'vue'
+import { useTaskStore } from './stores/tasks'
 
+const taskStore = useTaskStore()
+taskStore.loadTasks()
+const tasks = computed(() => taskStore.tasks)
+
+const isModalOpen = ref(false)
+const createTask = (description: string) => {
+	isModalOpen.value = false
+	taskStore.addTask(description)
+}
+
+const toggleStatus = (id: string) => taskStore.toggleTask(id)
 </script>
 
 <template>
@@ -8,14 +22,14 @@ import TaskModal from './components/TaskModal.vue';
 		<div class="list">
 			<div class="list__top">
 				<h1 class="list__title">To Do List</h1>
-				<button class="list__add-btn">
+				<button class="list__add-btn" @click="isModalOpen = true">
 					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<rect x="9" width="2" height="20" fill="#314B99" />
 						<rect x="20" y="9" width="2" height="20" transform="rotate(90 20 9)" fill="#314B99" />
 					</svg>
 				</button>
 			</div>
-			<TaskModal />
+			<TaskModal v-if="isModalOpen" @close="isModalOpen = false" @create="createTask" />
 			<div class="list__utils utiils">
 				<div class="utils__search">
 					<span class="utils__icon">
@@ -53,67 +67,7 @@ import TaskModal from './components/TaskModal.vue';
 					<div class="tasks__description">Дата</div>
 				</div>
 				<ul class="tasks__list">
-					<li class="tasks__item">
-						<button class="tasks__btn">
-							<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<g filter="url(#filter0_d_13_2211)">
-									<circle cx="14" cy="10" r="10" fill="white" />
-									<circle cx="14" cy="10" r="9.5" stroke="#134EC1" />
-								</g>
-								<path d="M10 9L14 14.5L18.5 5" stroke="#134EC1" stroke-linecap="round"
-									stroke-linejoin="round" />
-								<defs>
-									<filter id="filter0_d_13_2211" x="0" y="0" width="20" height="20"
-										filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-										<feFlood flood-opacity="0" result="BackgroundImageFix" />
-										<feColorMatrix in="SourceAlpha" type="matrix"
-											values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-										<feOffset dy="4" />
-										<feGaussianBlur stdDeviation="2" />
-										<feComposite in2="hardAlpha" operator="out" />
-										<feColorMatrix type="matrix"
-											values="0 0 0 0 0.0745098 0 0 0 0 0.305882 0 0 0 0 0.756863 0 0 0 0.15 0" />
-										<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_13_2211" />
-										<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_13_2211"
-											result="shape" />
-									</filter>
-								</defs>
-							</svg>
-						</button>
-						<p class="tasks__desc">Размещение новостей на сайте</p>
-						<div class="tasks__status">Выполнено</div>
-						<div class="tasks__date">22.04.2022</div>
-					</li>
-					<li class="tasks__item">
-						<button class="tasks__btn">
-							<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<circle cx="10" cy="10" r="9.5" stroke="#16191D" />
-							</svg>
-						</button>
-						<p class="tasks__task">Размещение новостей на сайте</p>
-						<div class="tasks__status">Выполнено</div>
-						<div class="tasks__date">22.04.2022</div>
-					</li>
-					<li class="tasks__item">
-						<button class="tasks__btn">
-							<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<circle cx="10" cy="10" r="9.5" stroke="#16191D" />
-							</svg>
-						</button>
-						<p class="tasks__task">Размещение новостей на сайте</p>
-						<div class="tasks__status">Выполнено</div>
-						<div class="tasks__date">22.04.2022</div>
-					</li>
-					<li class="tasks__item">
-						<button class="tasks__btn">
-							<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<circle cx="10" cy="10" r="9.5" stroke="#16191D" />
-							</svg>
-						</button>
-						<p class="tasks__task">Размещение новостей на сайте</p>
-						<div class="tasks__status">Выполнено</div>
-						<div class="tasks__date">22.04.2022</div>
-					</li>
+					<ListItem v-for="task in tasks" :key="task.id" :task="task" @toggle="toggleStatus" />
 				</ul>
 			</div>
 		</div>
@@ -305,40 +259,6 @@ import TaskModal from './components/TaskModal.vue';
 		width: 1px;
 		height: 3.2rem;
 		background-color: #c4c4c4;
-	}
-
-	&__item {
-		display: grid;
-		padding: 1.8rem 0;
-		grid-template-columns: 10rem auto 15rem 13rem;
-		transition: background-color .3s ease;
-		border-bottom: 1px solid #EEEBE9;
-
-		>* {
-			padding-left: 2rem;
-		}
-
-		&:hover {
-			background-color: #F6F9FF;
-		}
-
-		cursor: pointer;
-	}
-
-	&__btn {
-		display: inline-flex;
-		justify-content: center;
-		align-items: center;
-		max-height: 2rem;
-		background-color: transparent;
-		border: none;
-		outline: none;
-		padding-left: 0;
-		cursor: pointer;
-	}
-
-	&__status {
-		color: var(--color-blue);
 	}
 }
 </style>
