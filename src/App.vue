@@ -14,6 +14,14 @@ const createTask = (description: string) => {
 	taskStore.addTask(description)
 }
 
+const filterText = ref('')
+const filteredTasks = computed(() => {
+	if (filterText.value) {
+		return tasks.value.filter(task => task.description.toUpperCase().includes(filterText.value.toUpperCase()))
+	}
+	else return tasks.value
+})
+
 const toggleStatus = (id: string) => taskStore.toggleTask(id)
 </script>
 
@@ -39,7 +47,8 @@ const toggleStatus = (id: string) => taskStore.toggleTask(id)
 								fill="#59BBA6" />
 						</svg>
 					</span>
-					<input type="text" class="utils__filter" placeholder="Поиск Имени, статуса или даты">
+					<input type="text" class="utils__filter" placeholder="Поиск Имени, статуса или даты"
+						v-model="filterText">
 				</div>
 				<div class="utils__sort-container">
 					<div class="utils__sort-subtitle">Сортировать по:</div>
@@ -67,7 +76,7 @@ const toggleStatus = (id: string) => taskStore.toggleTask(id)
 					<div class="tasks__description">Дата</div>
 				</div>
 				<ul class="tasks__list">
-					<ListItem v-for="task in tasks" :key="task.id" :task="task" @toggle="toggleStatus" />
+					<ListItem v-for="task in filteredTasks" :key="task.id" :task="task" @toggle="toggleStatus" />
 				</ul>
 			</div>
 		</div>
@@ -107,7 +116,7 @@ const toggleStatus = (id: string) => taskStore.toggleTask(id)
 
 	&__selected::after {
 		content: '';
-		background-image: url("../public/arrow-down.svg");
+		background-image: url("/arrow-down.svg");
 		background-position: center;
 		background-repeat: no-repeat;
 		width: 1.2rem;

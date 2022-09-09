@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref, Ref } from 'vue'
+import { ref, Ref, watch } from 'vue'
 import { Task, Status } from '../types'
 
 export const useTaskStore = defineStore('tasks', () => {
@@ -39,6 +39,6 @@ export const useTaskStore = defineStore('tasks', () => {
 		tasks,
 		addTask,
 		toggleTask,
-		loadTasks
+		loadTasks,
 	}
 })
