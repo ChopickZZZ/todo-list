@@ -35,10 +35,29 @@ export const useTaskStore = defineStore('tasks', () => {
 		}
 	}
 
+	const sortTasks = (query: string) => {
+		switch (query) {
+			case 'date': {
+				tasks.value = tasks.value.sort((task1, task2) => task2.date - task1.date)
+				break
+			}
+			case 'status': {
+				tasks.value = tasks.value.sort((task1, task2) => {
+					if (task1.status === 'done' && task2.status === 'progress')
+						return -1
+					else return 1
+				})
+				break
+			}
+		}
+		localStorage.setItem('tasks', JSON.stringify(tasks.value))
+	}
+
 	return {
 		tasks,
 		addTask,
 		toggleTask,
 		loadTasks,
+		sortTasks
 	}
 })

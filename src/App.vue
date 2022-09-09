@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import TaskModal from './components/TaskModal.vue';
 import ListItem from './components/ListItem.vue';
-import { computed, ref } from 'vue'
+import { computed, Ref, ref } from 'vue'
 import { useTaskStore } from './stores/tasks'
+import { SortQuery } from './types';
 
 const taskStore = useTaskStore()
 taskStore.loadTasks()
@@ -21,6 +22,22 @@ const filteredTasks = computed(() => {
 	}
 	else return tasks.value
 })
+
+const isSelectActive = ref(false)
+
+const selectTextBase = {
+	'date': 'Дата',
+	'status': 'Статус'
+}
+
+const sortQuery: Ref<SortQuery> = ref('date')
+const sort = () => {
+	setTimeout(() => {
+		taskStore.sortTasks(sortQuery.value)
+		isSelectActive.value = false
+	}, 0)
+}
+
 
 const toggleStatus = (id: string) => taskStore.toggleTask(id)
 </script>
@@ -54,17 +71,21 @@ const toggleStatus = (id: string) => taskStore.toggleTask(id)
 					<div class="utils__sort-subtitle">Сортировать по:</div>
 					<div class="utils__select select">
 						<div class="select__box">
-							<div class="select__options-container active">
-								<div class="select__option">
-									<input class="select__radio" type="radio" id="date" name="sort">
-									<label class="select__label" for="date">Дата</label>
+							<div :class="['select__options-container', {active: isSelectActive}]">
+								<div class="select__option" @click="sort">
+									<input class="select__radio" value="date" type="radio" id="date" name="sort"
+										v-model="sortQuery">
+									<label class="select__label" @click.stop for="date">Дата</label>
 								</div>
-								<div class="select__option">
-									<input class="select__radio" type="radio" id="status" name="sort">
-									<label class="select__label" for="status">Статус</label>
+								<div class="select__option" @click="sort">
+									<input class="select__radio" value="status" type="radio" id="status" name="sort"
+										v-model="sortQuery">
+									<label class="select__label" @click.stop for="status">Статус</label>
 								</div>
 							</div>
-							<div class="select__selected">Дата</div>
+							<div class="select__selected" @click="isSelectActive = !isSelectActive">
+								{{selectTextBase[sortQuery]}}
+							</div>
 						</div>
 					</div>
 				</div>
@@ -75,9 +96,9 @@ const toggleStatus = (id: string) => taskStore.toggleTask(id)
 					<div class="tasks__description">Статус</div>
 					<div class="tasks__description">Дата</div>
 				</div>
-				<ul class="tasks__list">
+				<TransitionGroup tag="ul" class="tasks__list" name="list">
 					<ListItem v-for="task in filteredTasks" :key="task.id" :task="task" @toggle="toggleStatus" />
-				</ul>
+				</TransitionGroup>
 			</div>
 		</div>
 	</div>
@@ -102,6 +123,8 @@ const toggleStatus = (id: string) => taskStore.toggleTask(id)
 		border-radius: 5px;
 		order: 1;
 		transition: .3s ease;
+		pointer-events: none;
+		z-index: 10;
 	}
 
 	&__selected,
@@ -144,6 +167,7 @@ const toggleStatus = (id: string) => taskStore.toggleTask(id)
 }
 
 .select__options-container.active {
+	pointer-events: all;
 	max-height: 8rem;
 	opacity: 1;
 }
@@ -269,5 +293,20 @@ const toggleStatus = (id: string) => taskStore.toggleTask(id)
 		height: 3.2rem;
 		background-color: #c4c4c4;
 	}
+}
+
+.list-move,
+.list-enter-active,
+.list-leave-active {
+	transition: all 0.35s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+	opacity: 0;
+}
+
+.list-leave-active {
+	position: absolute;
 }
 </style>
