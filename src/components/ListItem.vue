@@ -19,8 +19,8 @@ const emit = defineEmits<{
 			</svg>
 			<svg v-else viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<g filter="url(#filter0_d_13_2211)">
-					<circle cx="14" cy="10" r="10" fill="white" />
-					<circle cx="14" cy="10" r="9.5" stroke="#134EC1" />
+					<circle cx="10" cy="10" r="10" fill="white" />
+					<circle cx="10" cy="10" r="9.5" stroke="#134EC1" />
 				</g>
 				<path d="M10 9L14 14.5L18.5 5" stroke="#134EC1" stroke-linecap="round" stroke-linejoin="round" />
 				<defs>
@@ -73,7 +73,7 @@ const emit = defineEmits<{
 		display: inline-flex;
 		justify-content: center;
 		align-items: center;
-		max-height: 2rem;
+		max-height: 3rem;
 		background-color: transparent;
 		padding-left: 0;
 	}
@@ -81,6 +81,10 @@ const emit = defineEmits<{
 	&__status-mark svg {
 		width: 2rem;
 		height: 2rem;
+	}
+
+	&__status-mark svg path {
+		transform: translateX(-4px);
 	}
 
 	&__status {

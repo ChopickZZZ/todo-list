@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+
+defineProps<{
+	active: boolean
+}>()
+
 const emit = defineEmits<{
 	(event: 'close'): void,
 	(event: 'create', description: string): void
@@ -9,20 +14,20 @@ const description = ref('')
 </script>
 
 <template>
-	<div class="modal">
+	<div :class="['modal', {show: active}]">
 		<div class="modal__backdrop" @click="emit('close')"></div>
 		<div class="modal__content">
 			<div class="modal__top">
 				<h2 class="modal__title">Создать новую задачу</h2>
 				<button class="modal__close-btn" @click="emit('close')">
-					<svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<path d="M1 1L4 4M7 7L4 4M4 4L7 1M4 4L1 7" stroke="white" stroke-linecap="round" />
+					<svg>
+						<use xlink:href="/sprite.svg#icon-x-mark"></use>
 					</svg>
 				</button>
 			</div>
 			<div class="modal__input-container">
 				<label class="modal__label" for="description">Описание</label>
-				<input class="modal__input" placeholder="Введите описание" v-model="description">
+				<input class="modal__input" placeholder="Введите описание" v-model="description" v-focus>
 			</div>
 			<button class="modal__main-btn" @click="emit('create', description)">Создать</button>
 		</div>
@@ -38,6 +43,9 @@ const description = ref('')
 	height: 100vh;
 	overflow: hidden;
 	z-index: 100;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity .3s ease;
 
 	&__backdrop {
 		width: 100%;
@@ -95,6 +103,11 @@ const description = ref('')
 		background-color: darken(#314B99, 5);
 	}
 
+	&__close-btn svg {
+		width: 8px;
+		height: 8px;
+	}
+
 	&__input-container {
 		margin-bottom: 3rem;
 	}
@@ -140,5 +153,10 @@ const description = ref('')
 	&__main-btn:hover {
 		background-color: darken(#F0F5FF, 5);
 	}
+}
+
+.modal.show {
+	opacity: 1;
+	pointer-events: all;
 }
 </style>

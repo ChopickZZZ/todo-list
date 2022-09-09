@@ -11,8 +11,10 @@ const tasks = computed(() => taskStore.tasks)
 
 const isModalOpen = ref(false)
 const createTask = (description: string) => {
-	isModalOpen.value = false
-	taskStore.addTask(description)
+	if (description) {
+		isModalOpen.value = false
+		taskStore.addTask(description)
+	}
 }
 
 const filterText = ref('')
@@ -38,7 +40,6 @@ const sort = () => {
 	}, 0)
 }
 
-
 const toggleStatus = (id: string) => taskStore.toggleTask(id)
 </script>
 
@@ -48,20 +49,19 @@ const toggleStatus = (id: string) => taskStore.toggleTask(id)
 			<div class="list__top">
 				<h1 class="list__title">To Do List</h1>
 				<button class="list__add-btn" @click="isModalOpen = true">
-					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-						<rect x="9" width="2" height="20" fill="#314B99" />
-						<rect x="20" y="9" width="2" height="20" transform="rotate(90 20 9)" fill="#314B99" />
+					<svg>
+						<use xlink:href="/sprite.svg#icon-Plus"></use>
 					</svg>
 				</button>
 			</div>
-			<TaskModal v-if="isModalOpen" @close="isModalOpen = false" @create="createTask" />
+			<Teleport to="body">
+				<TaskModal v-if="isModalOpen" @close="isModalOpen = false" @create="createTask" :active="isModalOpen" />
+			</Teleport>
 			<div class="list__utils utiils">
 				<div class="utils__search">
 					<span class="utils__icon">
-						<svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path
-								d="M12.8645 11.3208H12.0515L11.7633 11.0429C12.7719 9.86964 13.3791 8.34648 13.3791 6.68954C13.3791 2.99485 10.3842 0 6.68954 0C2.99485 0 0 2.99485 0 6.68954C0 10.3842 2.99485 13.3791 6.68954 13.3791C8.34648 13.3791 9.86964 12.7719 11.0429 11.7633L11.3208 12.0515V12.8645L16.4666 18L18 16.4666L12.8645 11.3208ZM6.68954 11.3208C4.12693 11.3208 2.05832 9.25214 2.05832 6.68954C2.05832 4.12693 4.12693 2.05832 6.68954 2.05832C9.25214 2.05832 11.3208 4.12693 11.3208 6.68954C11.3208 9.25214 9.25214 11.3208 6.68954 11.3208Z"
-								fill="#59BBA6" />
+						<svg>
+							<use xlink:href="/sprite.svg#icon-search"></use>
 						</svg>
 					</span>
 					<input type="text" class="utils__filter" placeholder="Поиск Имени, статуса или даты"
@@ -83,14 +83,15 @@ const toggleStatus = (id: string) => taskStore.toggleTask(id)
 									<label class="select__label" @click.stop for="status">Статус</label>
 								</div>
 							</div>
-							<div class="select__selected" @click="isSelectActive = !isSelectActive">
+							<div class="select__selected" @click="isSelectActive = !isSelectActive"
+								v-click-outside="() => (isSelectActive = false)">
 								{{selectTextBase[sortQuery]}}
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="list__tasks tasks">
+			<div class=" list__tasks tasks">
 				<div class="tasks__top">
 					<p class="tasks__description">Описание</p>
 					<div class="tasks__description">Статус</div>
@@ -114,7 +115,7 @@ const toggleStatus = (id: string) => taskStore.toggleTask(id)
 
 	&__options-container {
 		position: absolute;
-		top: 20px;
+		top: 25px;
 		right: 0;
 		background-color: #fff;
 		color: var(--color-primary);
@@ -151,7 +152,9 @@ const toggleStatus = (id: string) => taskStore.toggleTask(id)
 		right: 0;
 	}
 
-	&__option {}
+	&__option {
+		padding: .5rem .75rem;
+	}
 
 	&__option:hover {
 		background-color: #F6F9FF;
@@ -208,6 +211,11 @@ const toggleStatus = (id: string) => taskStore.toggleTask(id)
 		cursor: pointer;
 	}
 
+	&__add-btn svg {
+		width: 2rem;
+		height: 2rem;
+	}
+
 	&__add-btn:hover {
 		background-color: darken(#D6DBEB, 5);
 	}
@@ -262,7 +270,10 @@ const toggleStatus = (id: string) => taskStore.toggleTask(id)
 		margin-right: 1.5rem;
 	}
 
-	&__sort {}
+	&__icon svg {
+		width: 1.8rem;
+		height: 1.8rem;
+	}
 }
 
 .tasks {

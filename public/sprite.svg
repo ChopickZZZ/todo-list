@@ -1,0 +1,25 @@
+<svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<symbol id="icon-arrow-down" viewBox="0 0 32 32">
+<path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="2.2857" d="M2.286 9.143l13.714 13.714 13.714-13.714"></path>
+</symbol>
+<symbol id="icon-checkmark" viewBox="0 0 32 32">
+<path fill="#fff" style="fill: var(--color1, #fff)" d="M27.429 11.429c0 6.312-5.117 11.429-11.429 11.429s-11.429-5.117-11.429-11.429c0-6.312 5.117-11.429 11.429-11.429s11.429 5.117 11.429 11.429z"></path>
+<path fill="none" stroke="#134ec1" style="stroke: var(--color2, #134ec1)" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="1.1429" d="M26.857 11.429c0 5.996-4.861 10.857-10.857 10.857s-10.857-4.861-10.857-10.857c0-5.996 4.861-10.857 10.857-10.857s10.857 4.861 10.857 10.857z"></path>
+<path fill="none" stroke="#134ec1" style="stroke: var(--color2, #134ec1)" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1.1429" d="M11.429 10.286l4.571 6.286 5.143-10.857"></path>
+</symbol>
+<symbol id="icon-Ellipse" viewBox="0 0 32 32">
+<path stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="1.6" d="M31.2 16c0 8.395-6.805 15.2-15.2 15.2s-15.2-6.805-15.2-15.2c0-8.395 6.805-15.2 15.2-15.2s15.2 6.805 15.2 15.2z"></path>
+</symbol>
+<symbol id="icon-Plus" viewBox="0 0 32 32">
+<path fill="#314b99" style="fill: var(--color3, #314b99)" d="M14.4 0h3.2v32h-3.2v-32z"></path>
+<path fill="#314b99" style="fill: var(--color3, #314b99)" d="M32 14.4v3.2h-32v-3.2h32z"></path>
+</symbol>
+<symbol id="icon-search" viewBox="0 0 32 32">
+<path fill="#59bba6" style="fill: var(--color4, #59bba6)" d="M22.87 20.126h-1.445l-0.512-0.494c1.793-2.086 2.873-4.794 2.873-7.739 0-6.568-5.324-11.893-11.893-11.893s-11.893 5.324-11.893 11.893c0 6.568 5.324 11.893 11.893 11.893 2.946 0 5.654-1.079 7.739-2.873l0.494 0.512v1.445l9.148 9.13 2.726-2.726-9.13-9.148zM11.893 20.126c-4.556 0-8.233-3.678-8.233-8.233s3.678-8.233 8.233-8.233c4.556 0 8.233 3.678 8.233 8.233s-3.678 8.233-8.233 8.233z"></path>
+</symbol>
+<symbol id="icon-x-mark" viewBox="0 0 32 32">
+<path fill="none" stroke="#fff" style="stroke: var(--color1, #fff)" stroke-linejoin="miter" stroke-linecap="round" stroke-miterlimit="4" stroke-width="4" d="M4 4l12 12M28 28l-12-12M16 16l12-12M16 16l-12 12"></path>
+</symbol>
+</defs>
+</svg>
