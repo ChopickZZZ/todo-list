@@ -32,7 +32,7 @@ const selectTextBase = {
 	'status': 'Статус'
 }
 
-const sortQuery: Ref<SortQuery> = ref('date')
+const sortQuery: Ref<SortQuery> = ref(localStorage.getItem('query') as SortQuery || 'date')
 const sort = () => {
 	setTimeout(() => {
 		taskStore.sortTasks(sortQuery.value)
@@ -248,7 +248,7 @@ const toggleStatus = (id: string) => taskStore.toggleTask(id)
 	&__filter {
 		font-family: inherit;
 		font-size: 1.4rem;
-		width: 25rem;
+		width: 30rem;
 		padding: 1rem 1.6rem;
 		border: none;
 		outline: none;

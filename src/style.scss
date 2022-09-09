@@ -7,13 +7,11 @@
 }
 
 @font-face {
-	font-family: 'AGAvantGardeCyr Book';
-	src: url('/fonts/agavantgardecyr_book.eot');
-	src: url('/fonts/agavantgardecyr_book.eot?#iefix') format('embedded-opentype'),
-		url('/fonts/agavantgardecyr_book.woff2') format('woff2'),
-		url('/fonts/agavantgardecyr_book.woff') format('woff'),
-		url('/fonts/agavantgardecyr_book.ttf') format('truetype'),
-		url('/fonts/agavantgardecyr_book.svg#agavantgardecyr_book') format('svg');
+	font-family: 'AGAvantGardeCyr';
+	src: url('/fonts/AGAGCB__.eot');
+	src: local('☺'), url('/fonts/AGAGCB__.woff') format('woff'), url('/fonts/AGAGCB__.ttf') format('truetype'), url('/fonts/AGAGCB__.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
 
 :root {

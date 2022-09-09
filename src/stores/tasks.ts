@@ -50,6 +50,7 @@ export const useTaskStore = defineStore('tasks', () => {
 				break
 			}
 		}
+		localStorage.setItem('query', query)
 		localStorage.setItem('tasks', JSON.stringify(tasks.value))
 	}
 
