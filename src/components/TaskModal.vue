@@ -113,7 +113,7 @@ const description = ref('')
 	}
 
 	&__label {
-		font-family: 'AGAvantGardeCyr', sans-serif;
+		font-family: 'AGAvantGardeCyr Book', arial;
 		font-size: 1.4rem;
 		color: var(--color-primary);
 	}

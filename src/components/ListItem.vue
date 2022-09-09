@@ -14,17 +14,18 @@ const emit = defineEmits<{
 <template>
 	<li class="tasks__item" @click="emit('toggle', task.id)">
 		<div class="tasks__status-mark">
-			<svg v-if="task.status === 'progress'" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<svg v-if="task.status === 'progress'" width="20" height="20" viewBox="0 0 20 20" fill="none"
+				xmlns="http://www.w3.org/2000/svg">
 				<circle cx="10" cy="10" r="9.5" stroke="#16191D" />
 			</svg>
-			<svg v-else viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<svg v-else height="28" width="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<g filter="url(#filter0_d_13_2211)">
-					<circle cx="10" cy="10" r="10" fill="white" />
-					<circle cx="10" cy="10" r="9.5" stroke="#134EC1" />
+					<circle cx="14" cy="10" r="10" fill="white" />
+					<circle cx="14" cy="10" r="9.5" stroke="#134EC1" />
 				</g>
 				<path d="M10 9L14 14.5L18.5 5" stroke="#134EC1" stroke-linecap="round" stroke-linejoin="round" />
 				<defs>
-					<filter id="filter0_d_13_2211" x="0" y="0" width="20" height="20" filterUnits="userSpaceOnUse"
+					<filter id="filter0_d_13_2211" x="0" y="0" width="28" height="28" filterUnits="userSpaceOnUse"
 						color-interpolation-filters="sRGB">
 						<feFlood flood-opacity="0" result="BackgroundImageFix" />
 						<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
@@ -70,21 +71,17 @@ const emit = defineEmits<{
 	}
 
 	&__status-mark {
-		display: inline-flex;
-		justify-content: center;
-		align-items: center;
-		max-height: 3rem;
+		position: relative;
+		max-height: 2rem;
 		background-color: transparent;
 		padding-left: 0;
 	}
 
 	&__status-mark svg {
-		width: 2rem;
-		height: 2rem;
-	}
-
-	&__status-mark svg path {
-		transform: translateX(-4px);
+		position: absolute;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
 	}
 
 	&__status {

@@ -6,6 +6,16 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'AGAvantGardeCyr Book';
+	src: url('/fonts/agavantgardecyr_book.eot');
+	src: url('/fonts/agavantgardecyr_book.eot?#iefix') format('embedded-opentype'),
+		url('/fonts/agavantgardecyr_book.woff2') format('woff2'),
+		url('/fonts/agavantgardecyr_book.woff') format('woff'),
+		url('/fonts/agavantgardecyr_book.ttf') format('truetype'),
+		url('/fonts/agavantgardecyr_book.svg#agavantgardecyr_book') format('svg');
+}
+
 :root {
 	--color-primary: #16191D;
 	--color-blue: #134EC1;

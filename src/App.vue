@@ -91,7 +91,7 @@ const toggleStatus = (id: string) => taskStore.toggleTask(id)
 					</div>
 				</div>
 			</div>
-			<div class=" list__tasks tasks">
+			<div class="list__tasks tasks">
 				<div class="tasks__top">
 					<p class="tasks__description">Описание</p>
 					<div class="tasks__description">Статус</div>
@@ -153,7 +153,7 @@ const toggleStatus = (id: string) => taskStore.toggleTask(id)
 	}
 
 	&__option {
-		padding: .5rem .75rem;
+		padding: .25rem .5rem;
 	}
 
 	&__option:hover {
